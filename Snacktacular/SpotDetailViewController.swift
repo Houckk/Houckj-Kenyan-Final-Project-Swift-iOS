@@ -29,6 +29,7 @@ class SpotDetailViewController: UIViewController {
     
     
     var spot: Spot!
+    var spots: Spots!
     var reviews: Reviews!
     var photos: Photos!
     var aveRating: SpotsTableViewCell!
@@ -61,13 +62,7 @@ class SpotDetailViewController: UIViewController {
         //countryTableView.dataSource = self
         nameField.text = guideSelected
         guideLabel.text = guideSelected!
-        //print("The selected name is:\(selectedName)")
         
-        //lOGAR.selectedName = selectedName
-        //riversListLabel.text = lOGAR.getGuidesRivers(country: selectedName!.lowercased(), guide: guideSelected!)
-        
-//        riverDict = lOGAR.compiledCompleteGuidesWithRivers
-//        riverDict[selectedName!.lowercased()]
         
         if selectedName == "Iceland"
         {
@@ -86,14 +81,6 @@ class SpotDetailViewController: UIViewController {
           riversListLabel.text = lOGAR.austria[guideSelected]
         }
         
-        
-        
-        //print(riverDict)
-        //riversListLabel.text = lOGAR.iceland["Fish Partner"]//riverDict[selectedName!.lowercased()[guideSelected!]]
-        //print(lOGAR.[guideSelected!])
-        print("\(lOGAR).\(selectedName!.lowercased())[\(guideSelected!)]")
-        //country.countryArray[guideSelected].river
-        //print(guideSelected)
         tableView.delegate = self
         tableView.dataSource = self
         collectionView.delegate = self
@@ -155,7 +142,22 @@ class SpotDetailViewController: UIViewController {
         photos.loadData(spot: spot) {
             self.collectionView.reloadData()
         }
+        
+//        spots.loadData{
+//            //self.sortBasedOnSegmentPressed()
+//            self.tableView.reloadData()
+//        }
     }
+    
+    
+    
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        getLocation()
+//        navigationController?.setToolbarHidden(false, animated: false)
+//
+//    }
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
