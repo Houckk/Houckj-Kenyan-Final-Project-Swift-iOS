@@ -23,6 +23,7 @@ class SpotDetailViewController: UIViewController {
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
     @IBOutlet weak var guideLabel: UILabel!
+    @IBOutlet weak var riversListLabel: UILabel!
     
     
     
@@ -37,6 +38,9 @@ class SpotDetailViewController: UIViewController {
     var imagePicker = UIImagePickerController()
     var country = Country()
     var guideSelected: String!
+    var selectedName: String!
+    var lOGAR = ListOfGuidesAndRivers()
+    var riverDict = [Dictionary<String, String>]()
     //var countriesAvailable = ["Iceland", "Spain", "New Zealand", "Russia", "Austria"]
     
     
@@ -56,8 +60,20 @@ class SpotDetailViewController: UIViewController {
         //countryTableView.delegate = self
         //countryTableView.dataSource = self
         nameField.text = guideSelected
-        guideLabel.text = guideSelected!
-        print(guideSelected)
+        guideLabel.text = guideSelected! + ":"
+        //print("The selected name is:\(selectedName)")
+        
+        //lOGAR.selectedName = selectedName
+        //riversListLabel.text = lOGAR.getGuidesRivers(country: selectedName!.lowercased(), guide: guideSelected!)
+        
+//        riverDict = lOGAR.compiledCompleteGuidesWithRivers
+//        riverDict[selectedName!.lowercased()]
+        
+        riversListLabel.text = lOGAR.iceland["Fish Partner"]//riverDict[selectedName!.lowercased()[guideSelected!]]
+        //print(lOGAR.[guideSelected!])
+        print("\(lOGAR).\(selectedName!.lowercased())[\(guideSelected!)]")
+        //country.countryArray[guideSelected].river
+        //print(guideSelected)
         tableView.delegate = self
         tableView.dataSource = self
         collectionView.delegate = self
