@@ -730,7 +730,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Sign Out" id="0Xl-Y6-OJl">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="signOutPressed:" destination="BYZ-38-t0r" id="dGk-a8-jCQ"/>
+                                <action selector="signOutPressed:" destination="g3t-sA-aZg" id="R8c-r4-Yz8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
