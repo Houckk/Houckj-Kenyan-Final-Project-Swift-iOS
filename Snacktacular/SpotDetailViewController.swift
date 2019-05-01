@@ -60,7 +60,7 @@ class SpotDetailViewController: UIViewController {
         //countryTableView.delegate = self
         //countryTableView.dataSource = self
         nameField.text = guideSelected
-        guideLabel.text = guideSelected! + ":"
+        guideLabel.text = guideSelected!
         //print("The selected name is:\(selectedName)")
         
         //lOGAR.selectedName = selectedName
@@ -98,13 +98,17 @@ class SpotDetailViewController: UIViewController {
         
          reviews = Reviews()
          photos = Photos()
+         nameField.isHidden = true
+         addressField.isHidden = true
 //        nameField.text = spot.name
 //        addressField.text = spot.address
         
         
         let region = MKCoordinateRegion(center: spot.coordinate, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
         mapView.setRegion(region, animated: true)
+        mapView.isHidden = true
         updateUserInterface()
+    
     }
     
     
