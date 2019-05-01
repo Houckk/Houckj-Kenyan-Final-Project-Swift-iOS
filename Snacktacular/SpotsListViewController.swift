@@ -22,8 +22,9 @@ class SpotsListViewController: UIViewController {
     var currentLocation: CLLocation!
     var guides = ListOfGuidesAndRivers().icelandGuides
     var rivers = ListOfGuidesAndRivers().icelandRivers
-    var country = ListOfGuidesAndRivers().iceland
+    //var country = ListOfGuidesAndRivers().iceland
     var nD : CountryData!
+    var country = Country()
     var nameE: String!
     
     override func viewDidLoad() {
@@ -38,6 +39,9 @@ class SpotsListViewController: UIViewController {
         tableView.isHidden = true
         
         spots = Spots()
+        country.appendCountry{
+            self.tableView.reloadData()
+        }
     }
     
     
@@ -140,7 +144,7 @@ extension SpotsListViewController: UITableViewDelegate, UITableViewDataSource{
 //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.guides.count
+        return country.countryArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -148,8 +152,10 @@ extension SpotsListViewController: UITableViewDelegate, UITableViewDataSource{
         
         
         //cell.nameLabel.text = spots.spotArray[indexPath.row].name
-        cell.textLabel?.text = self.guides[indexPath.row]
-        cell.textLabel?.backgroundColor = .white
+        //cell.textLabel?.text = self.guides[indexPath.row]
+        //cell.textLabel?.backgroundColor = .white
+        
+        cell.textLabel?.text = country.countryArray[indexPath.row].guide!
         //cell.configureCell(spot: spots.spotArray[indexPath.row])
         
         

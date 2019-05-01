@@ -23,6 +23,7 @@ class CountryTableViewController: UIViewController {
     var spot: Spot!
     var nameData = SpotsListViewController()
     var authUI: FUIAuth!
+    var country = Country()
     
     
     
@@ -51,10 +52,13 @@ class CountryTableViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("🐽🐽🐽🐽")
         if segue.identifier == "CountrySelected"{
-           let destination = segue.destination as! SpotsListViewController
-           let selectedIndexPath = tableView.indexPathForSelectedRow!
+           let navigationController = segue.destination as! UINavigationController
+           //let destination = segue.destination as! SpotsListViewController
+            let destination = navigationController.viewControllers.first as! SpotsListViewController
+            let selectedIndexPath = tableView.indexPathForSelectedRow!
            
-           destination.nameE = countriesAvailable[selectedIndexPath.row]
+            destination.nameE = countriesAvailable[selectedIndexPath.row]
+            destination.country = country
            //destination.nD = countriesAvailable[selectedIndexPath.row]
            //destination.nameData
             //performSegue(withIdentifier: "CountrySelected", sender: self)
