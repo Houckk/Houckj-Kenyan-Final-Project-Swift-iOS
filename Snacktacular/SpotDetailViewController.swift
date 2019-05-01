@@ -34,6 +34,8 @@ class SpotDetailViewController: UIViewController {
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation!
     var imagePicker = UIImagePickerController()
+    var country = Country()
+    var guideSelected: String!
     //var countriesAvailable = ["Iceland", "Spain", "New Zealand", "Russia", "Austria"]
     
     
@@ -57,6 +59,7 @@ class SpotDetailViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         imagePicker.delegate = self
+        nameField.text = guideSelected
         
         if spot == nil{ //We are adding a new record, fields should be editable
             spot = Spot()

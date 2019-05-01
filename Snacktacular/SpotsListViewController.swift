@@ -94,7 +94,8 @@ class SpotsListViewController: UIViewController {
         {
            let destination = segue.destination as! SpotDetailViewController
            let selectedIndexPath = tableView.indexPathForSelectedRow!
-           destination.spot = spots.spotArray[selectedIndexPath.row]
+           destination.guideSelected = country.countryArray[selectedIndexPath.row].guide
+           destination.country = country
         } else {
             if let selectedIndexPath = tableView.indexPathForSelectedRow{
                 tableView.deselectRow(at: selectedIndexPath, animated: true)
