@@ -22,6 +22,7 @@ class SpotDetailViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
+    @IBOutlet weak var guideLabel: UILabel!
     
     
     
@@ -54,12 +55,15 @@ class SpotDetailViewController: UIViewController {
         //mapView.delegate = self
         //countryTableView.delegate = self
         //countryTableView.dataSource = self
+        nameField.text = guideSelected
+        guideLabel.text = guideSelected!
+        print(guideSelected)
         tableView.delegate = self
         tableView.dataSource = self
         collectionView.delegate = self
         collectionView.dataSource = self
         imagePicker.delegate = self
-        nameField.text = guideSelected
+        
         
         if spot == nil{ //We are adding a new record, fields should be editable
             spot = Spot()

@@ -204,12 +204,19 @@
                                                 <action selector="photoButtonPressed:" destination="L7d-5i-Cie" eventType="touchUpInside" id="PEM-R9-pwO"/>
                                             </connections>
                                         </button>
-                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G8x-vr-zHs">
-                                            <rect key="frame" x="0.0" y="55" width="375" height="180"/>
+                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G8x-vr-zHs">
+                                            <rect key="frame" x="0.0" y="121" width="375" height="114"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="180" id="g9O-38-g9R"/>
                                             </constraints>
                                         </mapView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZj-gG-LBt">
+                                            <rect key="frame" x="8" y="61" width="359" height="52"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -328,11 +335,6 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="ado-Of-9Kv"/>
-                        <barButtonItem title="Lookup Place" id="p6I-yX-vyF">
-                            <connections>
-                                <action selector="lookupPlacePressed:" destination="L7d-5i-Cie" id="Cgx-Di-X6b"/>
-                            </connections>
-                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="R1z-zr-Kjm">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="S5P-gk-K1R">
@@ -351,6 +353,7 @@
                         <outlet property="averageRatingLabel" destination="B7N-4G-a6e" id="wSr-er-pBu"/>
                         <outlet property="cancelBarButton" destination="S5P-gk-K1R" id="sOv-xc-DuX"/>
                         <outlet property="collectionView" destination="JfI-qt-dbd" id="hnO-GP-dfz"/>
+                        <outlet property="guideLabel" destination="yZj-gG-LBt" id="o5b-Dl-6Yu"/>
                         <outlet property="mapView" destination="G8x-vr-zHs" id="uIu-do-OSv"/>
                         <outlet property="nameField" destination="4QE-cW-8Sq" id="mlK-Cz-ISL"/>
                         <outlet property="saveBarButton" destination="lI7-oK-qeu" id="5Be-CK-iod"/>
