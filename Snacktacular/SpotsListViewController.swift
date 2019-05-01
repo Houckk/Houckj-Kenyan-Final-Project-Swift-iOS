@@ -22,10 +22,12 @@ class SpotsListViewController: UIViewController {
     var currentLocation: CLLocation!
     var guides = ListOfGuidesAndRivers().icelandGuides
     var rivers = ListOfGuidesAndRivers().icelandRivers
+    var cImage = ["Iceland1","Spain1","New Zealand1","Russia1","Austria1"]
     //var country = ListOfGuidesAndRivers().iceland
     var nD : CountryData!
     var country = Country()
     var nameE: String!
+    var ipTest = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +38,7 @@ class SpotsListViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.isHidden = true
+        //tableView.isHidden = true
         
         spots = Spots()
         country.appendCountry{
@@ -154,8 +156,40 @@ extension SpotsListViewController: UITableViewDelegate, UITableViewDataSource{
         //cell.nameLabel.text = spots.spotArray[indexPath.row].name
         //cell.textLabel?.text = self.guides[indexPath.row]
         //cell.textLabel?.backgroundColor = .white
+        cell.textLabel?.backgroundColor = .clear
+        //cell.textLabel?.text = country.countryArray[indexPath.row].guide!
+//        if nameE == "New Zealand"
+//        {
+//            nameE = "NewZealand"
+//        }
+//        if country.countryArray[indexPath.row].name == nameE!
+//        {
+//            cell.textLabel?.text = country.countryArray[indexPath.row].guide!
+//        } else {
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
         
-        cell.textLabel?.text = country.countryArray[indexPath.row].guide!
+        if country.countryArray[indexPath.row].name == nameE!
+        {
+            cell.textLabel?.text = country.countryArray[indexPath.row].guide!
+        } else {
+            ipTest = 1
+            tableView.beginUpdates()
+            cell.clipsToBounds = true
+            tableView.endUpdates()
+            ipTest = 0
+        }
+        
+        
+        
+        
+        let backgroundImage = UIImage(named: "Iceland1")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+        
+        //tableView.backgroundView = UIImage(named: "Iceland1")
+        print("🚨🚨🚨🚨🚨🚨")
+        //print(nameE!)
         //cell.configureCell(spot: spots.spotArray[indexPath.row])
         
         
@@ -173,7 +207,13 @@ extension SpotsListViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        if ipTest == 0
+        {
+            print(60)
+            return 60
+        }
+        print(0)
+        return 0
     }
 }
 

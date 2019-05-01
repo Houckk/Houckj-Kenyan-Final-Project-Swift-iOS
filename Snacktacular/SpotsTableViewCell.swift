@@ -11,7 +11,7 @@ import CoreLocation
 
 class SpotsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var ratingLabel: UILabel!
+   // @IBOutlet weak var ratingLabel: UILabel!
     
     var currentLocation: CLLocation!
     var spot: Spot!

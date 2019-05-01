@@ -24,6 +24,7 @@ class CountryTableViewController: UIViewController {
     var nameData = SpotsListViewController()
     var authUI: FUIAuth!
     var country = Country()
+    //var selectedIndexPath = IndexPath!
     
     
     

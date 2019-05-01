@@ -28,26 +28,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2IP-ka-3K6" id="X51-Os-IPJ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Avg. Rating: 6.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0J-Ud-eFA">
-                                                    <rect key="frame" x="123" y="19" width="128" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="CKT-tw-Wrk"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="128" id="m2D-dY-oxq"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="A0J-Ud-eFA" secondAttribute="trailing" constant="8" id="BbK-gX-9D1"/>
-                                                <constraint firstItem="A0J-Ud-eFA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X51-Os-IPJ" secondAttribute="leading" constant="20" symbolic="YES" id="NlQ-OL-xTY"/>
-                                                <constraint firstItem="A0J-Ud-eFA" firstAttribute="top" secondItem="X51-Os-IPJ" secondAttribute="top" constant="33" id="dgE-GE-WvC"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="ratingLabel" destination="A0J-Ud-eFA" id="xEA-n1-1uf"/>
                                             <segue destination="L7d-5i-Cie" kind="show" identifier="ShowSpot" id="sl5-aU-Gjj"/>
                                         </connections>
                                     </tableViewCell>
@@ -81,6 +63,7 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="1A4-7d-Reh">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="t0W-d8-sh6"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="h6L-yW-eBN">
                             <connections>
                                 <segue destination="bJy-tV-PMh" kind="presentation" identifier="AddSpot" id="Pko-9g-ZUS"/>
