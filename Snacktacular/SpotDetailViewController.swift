@@ -40,7 +40,7 @@ class SpotDetailViewController: UIViewController {
     var guideSelected: String!
     var selectedName: String!
     var lOGAR = ListOfGuidesAndRivers()
-    var riverDict = [Dictionary<String, String>]()
+    //var riverDict = ListOfGuidesAndRivers().austria
     //var countriesAvailable = ["Iceland", "Spain", "New Zealand", "Russia", "Austria"]
     
     
@@ -69,7 +69,27 @@ class SpotDetailViewController: UIViewController {
 //        riverDict = lOGAR.compiledCompleteGuidesWithRivers
 //        riverDict[selectedName!.lowercased()]
         
-        riversListLabel.text = lOGAR.iceland["Fish Partner"]//riverDict[selectedName!.lowercased()[guideSelected!]]
+        if selectedName == "Iceland"
+        {
+          riversListLabel.text = lOGAR.iceland[guideSelected]
+        } else if selectedName == "Spain"
+        {
+          riversListLabel.text = lOGAR.spain[guideSelected]
+        } else if selectedName == "New Zealand"
+        {
+          riversListLabel.text = lOGAR.newZealand[guideSelected]
+        } else if selectedName == "Russia"
+        {
+          riversListLabel.text = lOGAR.russia[guideSelected]
+        } else if selectedName == "Austria"
+        {
+          riversListLabel.text = lOGAR.austria[guideSelected]
+        }
+        
+        
+        
+        //print(riverDict)
+        //riversListLabel.text = lOGAR.iceland["Fish Partner"]//riverDict[selectedName!.lowercased()[guideSelected!]]
         //print(lOGAR.[guideSelected!])
         print("\(lOGAR).\(selectedName!.lowercased())[\(guideSelected!)]")
         //country.countryArray[guideSelected].river
