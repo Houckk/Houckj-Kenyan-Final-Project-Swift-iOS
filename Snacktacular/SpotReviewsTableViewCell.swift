@@ -16,9 +16,11 @@ class SpotReviewsTableViewCell: UITableViewCell {
     @IBOutlet var starImageCollection: [UIImageView]!
     
     
+    var reviews : Reviews!
     
     var review: Review! {
         didSet {
+            //reviews.reviewArray[review.title]
             reviewTitleLabel.text = review.title
             reviewTextLabel.text = review.text
             for starImage in starImageCollection {

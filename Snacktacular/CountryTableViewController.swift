@@ -24,7 +24,6 @@ class CountryTableViewController: UIViewController {
     var nameData = SpotsListViewController()
     var authUI: FUIAuth!
     var country = Country()
-    //var selectedIndexPath = IndexPath!
     
     
     
@@ -38,8 +37,6 @@ class CountryTableViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-//        self.tableView.register(CountryImageTableViewCell.self, forCellReuseIdentifier: "Country Cell")
-        
     }
     
 
@@ -60,9 +57,7 @@ class CountryTableViewController: UIViewController {
            
             destination.nameE = countriesAvailable[selectedIndexPath.row]
             destination.country = country
-           //destination.nD = countriesAvailable[selectedIndexPath.row]
-           //destination.nameData
-            //performSegue(withIdentifier: "CountrySelected", sender: self)
+            
            }else {
                 if let selectedPath = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: selectedPath, animated: true)
@@ -122,16 +117,7 @@ extension CountryTableViewController: UITableViewDataSource, UITableViewDelegate
         cell.textLabel?.textColor = .white
         cell.textLabel?.textAlignment = .center
         cell.textLabel?.font = UIFont.init(name: "Arial", size: 24.0)
-        //cell.textLabel?.adjustsFontSizeToFitWidth = true
-//        let button = UIButton(frame: CGRect(x: 150, y: 100, width: 125, height: 50))
-//        button.backgroundColor = .purple
-//        //button.titleLabel?.textColor = UIColor.red
-//        button.setTitle(countriesAvailable[indexPath.row], for: .normal)
-//        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-//
-//
-//        //self.view.addSubview(button)
-//        cell.addSubview(button)
+        
         if cell.isSelected{
             print("🦄🦄🦄🦄")
             performSegue(withIdentifier: "CountrySelected", sender: self)
@@ -140,12 +126,6 @@ extension CountryTableViewController: UITableViewDataSource, UITableViewDelegate
         return cell
     }
     
-    
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let viewController = storyboard?.instantiateViewController(withIdentifier: countriesAvailable[indexPath.row])
-//        self.navigationController?.pushViewController(SpotsListViewController, animated: true)
-//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let currentImage = countriesImage[indexPath.row]

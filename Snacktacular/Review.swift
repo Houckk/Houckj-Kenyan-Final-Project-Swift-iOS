@@ -16,17 +16,18 @@ class Review {
     var reviewerUserID: String
     var date: Date
     var documentID: String
+    var spot: String
     
     
     
     var dictionary: [String: Any] {
         let timeIntervalDate = date.timeIntervalSince1970
-        return ["title": title, "text": text, "rating": rating, "reviewerUserID": reviewerUserID, "date": timeIntervalDate]
+        return ["title": title, "text": text, "rating": rating, "reviewerUserID": reviewerUserID, "date": timeIntervalDate, "spot": spot]
 //        return ["title": title, "text": text, "rating": rating, "reviewerUserID": reviewerUserID, "date": date]
     }
     
     
-    init(title: String, text: String, rating: Int, reviewerUserID: String, date: Date, documentID: String)
+    init(title: String, text: String, rating: Int, reviewerUserID: String, date: Date, documentID: String, spot: String)
     {
         self.title = title
         self.text = text
@@ -34,6 +35,7 @@ class Review {
         self.reviewerUserID = reviewerUserID
         self.date = date
         self.documentID = documentID
+        self.spot = spot
         
     }
     
@@ -48,7 +50,8 @@ class Review {
         //print("😔 Calling Convenience init")
         let timeIntervalDate = dictionary["date"] as! TimeInterval? ?? TimeInterval()
         let date = Date(timeIntervalSince1970: timeIntervalDate)
-        self.init(title: title, text: text, rating: rating, reviewerUserID: reviewerUserID, date: date, documentID: "")
+        let spot = dictionary["spot"] as! String? ?? ""
+        self.init(title: title, text: text, rating: rating, reviewerUserID: reviewerUserID, date: date, documentID: "", spot: spot)
     }
     
     
@@ -57,13 +60,13 @@ class Review {
     
     convenience init() {
         let currentUserID = Auth.auth().currentUser?.email ?? "Unknown User"
-        self.init(title: "", text: "", rating: 0, reviewerUserID: currentUserID, date: Date(), documentID: "")
+        self.init(title: "", text: "", rating: 0, reviewerUserID: currentUserID, date: Date(), documentID: "", spot: "")
     }
     
     
     
     
-    func saveData(spot: Spot, completion: @escaping (Bool) -> ()){
+    func saveData(completion: @escaping (Bool) -> ()){
         let db = Firestore.firestore()
        
         //create dictionary representing the data we want to save
@@ -71,30 +74,31 @@ class Review {
         // if we HAVE saved a record, well have a document ID
         if self.documentID != ""
         {
-            let ref = db.collection("spots").document(spot.documentID).collection("reviews").document(self.documentID)
+            let ref = db.collection("reviews").document(self.documentID)
             ref.setData(dataToSave) { (error) in
                 if let error = error {
                     print("**** ERROR: Updating document \(self.documentID) in spot \(error.localizedDescription)")
                     completion(false)
                 } else {
                     print("$$$$$ - Document updated with ref ID \(ref.documentID)")
-                    spot.updateAverageRating {
+                    /*spot.updateAverageRating {
                         completion(true)
-                    }
+                    }*/
                 }
                 
             }
         } else {
             var ref: DocumentReference? = nil //Let firestore create the new document ID
-            ref = db.collection("spots").document(spot.documentID).collection("reviews").addDocument(data: dataToSave){ error in
+            ref = db.collection("reviews").addDocument(data: dataToSave){ error in
                 if let error = error {
                     print("**** ERROR: creating new document \(self.documentID) \(error.localizedDescription) ASDFASDFASDFASDF")
                     completion(false)
                 } else {
                     print("$$$$$ - new document created with ref ID \(ref?.documentID ?? "Unknown")")
-                    spot.updateAverageRating {
+                    completion(true)
+                    /*spot.updateAverageRating {
                         completion(true)
-                    }
+                    }*/
                 }
             }
         }
@@ -102,7 +106,7 @@ class Review {
     func deleteData(spot: Spot, completed: @escaping (Bool) -> ())
     {
         let db = Firestore.firestore()
-        db.collection("spots").document(spot.documentID).collection("reviews").document(documentID).delete () { error in
+        db.collection("reviews").document(documentID).delete () { error in
             if let error = error {
                 print("😡😡😡😡 ERROR: Deleting review documentID \(self.documentID) \(error.localizedDescription)")
                 completed(false)

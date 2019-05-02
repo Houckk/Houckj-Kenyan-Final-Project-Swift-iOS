@@ -91,12 +91,4 @@ class ListOfGuidesAndRivers{
 
     compiledCompleteGuidesWithRivers = [iceland, spain, newZealand, russia, austria]
     }
-    //let compiledCompleteGuides = [icelandGuides, spainGuides, newZealandGuides, russiaGuides, austriaGuides]
-
-    
-//    func getGuidesRivers (country: String, guide: String) -> String {
-//        Dictionary(country)
-//        return iceland["Fish Partner"]!
-//        return country[guide]!
-//    }
 }

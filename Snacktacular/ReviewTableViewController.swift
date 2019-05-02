@@ -23,9 +23,11 @@ class ReviewTableViewController: UITableViewController {
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var buttonsBackgroundView: UIView!
     @IBOutlet var starButtonCollection: [UIButton]!
+    var spotName: String!
     
     var spot: Spot!
     var review: Review!
+    var name: String!
     let dateFormatter = DateFormatter()
     var rating = 0 {
         didSet {
@@ -49,11 +51,15 @@ class ReviewTableViewController: UITableViewController {
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         
+        nameLabel.text = name!
+        print("⛺️⛺️⛺️⛺️")
+        print(name!)
         
         guard spot != nil else{
             print("@@@@@@ ERROR: Did not have a valid Spot in ReviewDetailViewController")
             return
         }
+        
         if review == nil {
             review = Review()
         }
@@ -119,7 +125,8 @@ class ReviewTableViewController: UITableViewController {
     func saveThenSegue(){
         review.title = reviewTitleField.text!
         review.text = reviewTextView.text!
-        review.saveData(spot: spot) { (success) in
+        review.spot = spotName
+        review.saveData { (success) in
             if success {
                 self.leaveViewController()
             } else {

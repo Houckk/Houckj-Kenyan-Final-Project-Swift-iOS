@@ -41,15 +41,14 @@ class SpotDetailViewController: UIViewController {
     var guideSelected: String!
     var selectedName: String!
     var lOGAR = ListOfGuidesAndRivers()
-    //var riverDict = ListOfGuidesAndRivers().austria
-    //var countriesAvailable = ["Iceland", "Spain", "New Zealand", "Russia", "Austria"]
+    var spotName: String!
+    var name: SpotsListViewController!
     
-    
-    
-    //var countriesImage = [#imageLiteral(resourceName: "Iceland1"),#imageLiteral(resourceName: "Spain1"),#imageLiteral(resourceName: "New Zealand1"),#imageLiteral(resourceName: "Russia1"),#imageLiteral(resourceName: "Austria1")]
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("*** \(spotName)")
         
         //hides keyboard if we tap outside of a field
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
@@ -58,10 +57,9 @@ class SpotDetailViewController: UIViewController {
         
         
         //mapView.delegate = self
-        //countryTableView.delegate = self
-        //countryTableView.dataSource = self
         nameField.text = guideSelected
         guideLabel.text = guideSelected!
+        //guideLabel.text = name.spotArray[spotName]
         
         
         if selectedName == "Iceland"
@@ -107,7 +105,7 @@ class SpotDetailViewController: UIViewController {
          photos = Photos()
          nameField.isHidden = true
          addressField.isHidden = true
-//        nameField.text = spot.name
+         //nameField.text = spot.name
 //        addressField.text = spot.address
         
         
@@ -115,7 +113,8 @@ class SpotDetailViewController: UIViewController {
         mapView.setRegion(region, animated: true)
         mapView.isHidden = true
         updateUserInterface()
-    
+        
+        spots = Spots()
     }
     
     
@@ -123,7 +122,8 @@ class SpotDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reviews.loadData(spot: spot) {
+        reviews.loadData(spotName: spotName) {
+            print("in load data \(self.reviews.reviewArray.count)")
             self.tableView.reloadData()
             if self.reviews.reviewArray.count > 0 {
                 var total = 0
@@ -143,10 +143,10 @@ class SpotDetailViewController: UIViewController {
             self.collectionView.reloadData()
         }
         
-//        spots.loadData{
-//            //self.sortBasedOnSegmentPressed()
-//            self.tableView.reloadData()
-//        }
+        spots.loadData{
+            //self.sortBasedOnSegmentPressed()
+            self.tableView.reloadData()
+        }
     }
     
     
@@ -161,27 +161,32 @@ class SpotDetailViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        spot.name = nameField.text!
+        spot.name = guideSelected
         spot.address = addressField.text!
         switch segue.identifier ?? "" {
         case "AddReview":
             let navigationController = segue.destination as! UINavigationController
             let destination = navigationController.viewControllers.first as! ReviewTableViewController
             destination.spot = spot
+            destination.name = guideSelected
+            
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: selectedIndexPath, animated: true)
             }
+            destination.spotName = spotName
         case "ShowReview":
             let destination = segue.destination as! ReviewTableViewController
             destination.spot = spot
             let selectedIndexPath = tableView.indexPathForSelectedRow!
             destination.review = reviews.reviewArray[selectedIndexPath.row]
             
-            //destination.spot = spot
+            destination.spot = spot
+            destination.spotName = spotName
             
-            //let selectedIndexPath = tableView.indexPathForSelectedRow!
-            //destination.reviews = reviews.reviewArray[selectedIndexPath.row]
-            //destination.spot = spot
+            
+//            let selectedIndexPath = tableView.indexPathForSelectedRow!
+//            destination.review = reviews.reviewArray[selectedIndexPath.row]
+//            destination.spot = spot
             
         default:
             print("******ERROR: Did not have a segue in SDVC prepare(for segue:)")
@@ -205,7 +210,7 @@ class SpotDetailViewController: UIViewController {
     
     @IBAction func textFieldReturnPressed(_ sender: UITextField) {
         sender.resignFirstResponder()
-        spot.name = nameField.text!
+        spot.name = guideSelected
         spot.address = addressField.text!
         updateUserInterface()
     }
@@ -234,6 +239,7 @@ class SpotDetailViewController: UIViewController {
                 self.cancelBarButton.title = ""
                 self.navigationController?.setToolbarHidden(true, animated: true)
                 self.disableTextEditing()
+                print("🏖🏖🏖🏖🏖🏖🏖")
                 if segueIdentifier == "AddReview" {
                     self.performSegue(withIdentifier: segueIdentifier, sender: nil)
                 } else {
@@ -317,7 +323,7 @@ class SpotDetailViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
-        spot.name = nameField.text!
+        spot.name = guideSelected
         spot.address = addressField.text!
         spot.saveData { success in
             if success {
@@ -331,9 +337,6 @@ class SpotDetailViewController: UIViewController {
     
     
     @IBAction func lookupPlacePressed(_ sender: UIBarButtonItem) {
-//        let autocompleteController = GMSAutocompleteViewController()
-//        autocompleteController.delegate = self
-//        present(autocompleteController, animated: true, completion: nil)
         print("🙀🙀🙀🙀")
     }
     
@@ -454,7 +457,7 @@ extension SpotDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! SpotReviewsTableViewCell
         cell.review = reviews.reviewArray[indexPath.row]
-        cell.backgroundColor = .red
+        //cell.backgroundColor = .red
         return cell
     }
     

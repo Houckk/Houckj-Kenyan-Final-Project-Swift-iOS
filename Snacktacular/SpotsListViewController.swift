@@ -17,33 +17,41 @@ class SpotsListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
     var spots: Spots!
-    //var authUI: FUIAuth!
+    //var authUI: FUIAuth! //***
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation!
     var guides = ListOfGuidesAndRivers().icelandGuides
     var rivers = ListOfGuidesAndRivers().icelandRivers
     var cImage = ["Iceland1","Spain1","New Zealand1","Russia1","Austria1"]
-    //var country = ListOfGuidesAndRivers().iceland
+    
     var nD : CountryData!
     var country = Country()
     var nameE: String!
     var ipTest = 0
+    var listArray = [String]()
+    var spotArray = [Country.countryData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //authUI = FUIAuth.defaultAuthUI()
-        // You need to adopt a FUIAuthDelegate protocol to receive callback
+         //You need to adopt a FUIAuthDelegate protocol to receive callback
         //authUI.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
         //tableView.isHidden = true
-        
+        sortSegmentedControl.isHidden = true
         spots = Spots()
         country.appendCountry{
             self.tableView.reloadData()
         }
+        for country in country.countryArray {
+            if country.name == nameE {
+                spotArray.append(country)
+            }
+        }
+        tableView.reloadData()
     }
     
     
@@ -97,6 +105,9 @@ class SpotsListViewController: UIViewController {
            destination.guideSelected = country.countryArray[selectedIndexPath.row].guide
            destination.country = country
            destination.selectedName = nameE
+           destination.spotName = spotArray[selectedIndexPath.row].guide
+
+            
         } else {
             if let selectedIndexPath = tableView.indexPathForSelectedRow{
                 tableView.deselectRow(at: selectedIndexPath, animated: true)
@@ -148,35 +159,25 @@ extension SpotsListViewController: UITableViewDelegate, UITableViewDataSource{
 //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return country.countryArray.count
+        //return country.countryArray.count
+        return spotArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SpotsTableViewCell
         
-        
-        //cell.nameLabel.text = spots.spotArray[indexPath.row].name
-        //cell.textLabel?.text = self.guides[indexPath.row]
-        //cell.textLabel?.backgroundColor = .white
         cell.textLabel?.backgroundColor = .clear
-        //cell.textLabel?.text = country.countryArray[indexPath.row].guide!
-//        if nameE == "New Zealand"
-//        {
-//            nameE = "NewZealand"
-//        }
-//        if country.countryArray[indexPath.row].name == nameE!
-//        {
-//            cell.textLabel?.text = country.countryArray[indexPath.row].guide!
-//        } else {
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
+        cell.textLabel?.text = spotArray[indexPath.row].guide
         
-        if country.countryArray[indexPath.row].name == nameE!
+        /*if country.countryArray[indexPath.row].name == nameE!
         {
+            
             cell.textLabel?.text = country.countryArray[indexPath.row].guide!
         } else {
-            ipTest = 1
+            
             tableView.beginUpdates()
+            tableView.rowHeight = 1
+            //ipTest = 1
             cell.clipsToBounds = true
             tableView.endUpdates()
             ipTest = 0
@@ -189,10 +190,6 @@ extension SpotsListViewController: UITableViewDelegate, UITableViewDataSource{
         let imageView = UIImageView(image: backgroundImage)
         self.tableView.backgroundView = imageView
         
-        //tableView.backgroundView = UIImage(named: "Iceland1")
-        print("🚨🚨🚨🚨🚨🚨")
-        //print(nameE!)
-        //cell.configureCell(spot: spots.spotArray[indexPath.row])
         
         
     
@@ -202,13 +199,14 @@ extension SpotsListViewController: UITableViewDelegate, UITableViewDataSource{
         label.text = "I'm a test label"
         label.backgroundColor = .red
         cell.addSubview(label)
-        print("🦁🦁🦁🦁🦁🦁")
+        print("🦁🦁🦁🦁🦁🦁")*/
         
         
         return cell
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    /*func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         if ipTest == 0
         {
             print(60)
@@ -216,7 +214,7 @@ extension SpotsListViewController: UITableViewDelegate, UITableViewDataSource{
         }
         print(0)
         return 0
-    }
+    }*/
 }
 
 //extension SpotsListViewController: FUIAuthDelegate{
