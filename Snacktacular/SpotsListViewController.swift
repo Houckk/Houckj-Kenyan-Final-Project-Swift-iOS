@@ -22,6 +22,7 @@ class SpotsListViewController: UIViewController {
     var currentLocation: CLLocation!
     var guides = ListOfGuidesAndRivers().icelandGuides
     var rivers = ListOfGuidesAndRivers().icelandRivers
+    var passed : SpotDetailViewController!
     var cImage = ["Iceland1","Spain1","New Zealand1","Russia1","Austria1"]
     
     var nD : CountryData!
@@ -168,6 +169,8 @@ extension SpotsListViewController: UITableViewDelegate, UITableViewDataSource{
         
         cell.textLabel?.backgroundColor = .clear
         cell.textLabel?.text = spotArray[indexPath.row].guide
+        
+        
         
         /*if country.countryArray[indexPath.row].name == nameE!
         {

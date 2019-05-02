@@ -43,6 +43,7 @@ class SpotDetailViewController: UIViewController {
     var lOGAR = ListOfGuidesAndRivers()
     var spotName: String!
     var name: SpotsListViewController!
+    var passedValue: String!
     
   
 
@@ -57,26 +58,31 @@ class SpotDetailViewController: UIViewController {
         
         
         //mapView.delegate = self
-        nameField.text = guideSelected
-        guideLabel.text = guideSelected!
-        //guideLabel.text = name.spotArray[spotName]
+        nameField.text = spotName
+        print(spotName)
+        print(selectedName)
+        print(guideSelected)
+        guideLabel.text = spotName!
+        var count = 0
+       
+        //guideLabel.text = name.spotArray[count]
         
         
         if selectedName == "Iceland"
         {
-          riversListLabel.text = lOGAR.iceland[guideSelected]
+          riversListLabel.text = lOGAR.iceland[spotName]
         } else if selectedName == "Spain"
         {
-          riversListLabel.text = lOGAR.spain[guideSelected]
+          riversListLabel.text = lOGAR.spain[spotName]
         } else if selectedName == "New Zealand"
         {
-          riversListLabel.text = lOGAR.newZealand[guideSelected]
+          riversListLabel.text = lOGAR.newZealand[spotName]
         } else if selectedName == "Russia"
         {
-          riversListLabel.text = lOGAR.russia[guideSelected]
+          riversListLabel.text = lOGAR.russia[spotName]
         } else if selectedName == "Austria"
         {
-          riversListLabel.text = lOGAR.austria[guideSelected]
+          riversListLabel.text = lOGAR.austria[spotName]
         }
         
         tableView.delegate = self
